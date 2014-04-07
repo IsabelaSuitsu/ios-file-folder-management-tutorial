@@ -13,6 +13,26 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //    NSFileManager *fileManager = [[NSFileManager alloc] init ];
+    //    NSArray *urls = [fileManager URLsForDirectory: NSDocumentDirectory inDomains:NSUserDomainMask]; //localizaçao da pasta de documentos
+    //    for(int i = 0; i < [urls count]; i++ ) {
+    //        NSLog(@"%@", urls[i]);// imprime a localizaçao da pasta de documentos
+    //    }
+    
+    //diretorio temporario
+    NSString *caminho = [NSTemporaryDirectory() stringByAppendingPathComponent:@"MeuArquivo.txt"];
+    NSArray *nomes = @[@"Paz" , @"Amor" ] ;
+    BOOL resultado = [nomes writeToFile:caminho atomically:YES];
+    NSArray *leitura = [[NSArray alloc] initWithContentsOfFile: caminho ] ;
+    if ([leitura count] != [nomes count])
+        NSLog(@"Falha de leitura");
+    else
+        NSLog(@"Leitura realizada!");
+    if(!resultado)
+        NSLog(@"Falha de escrita");
+    else
+        NSLog(@"Escrita realizada!");
+    
     ReceitaViewController *viewController = [[ReceitaViewController alloc]
                                             initWithNibName:nil
                                             bundle:nil];
